@@ -1,0 +1,30 @@
+.create {
+    /* align-items: center;
+    align-content: center; */
+    text-align: center;
+}
+
+.forms {
+    /* align-items: center;
+    align-content: center;
+    text-align: center; */
+    /* background-color: pink; */
+}
+
+.forms form {
+    /* background-color: red; */
+    /* align-items: center;
+    align-content: center;
+    text-align: center; */
+}
+
+.forms label {
+    justify-content: center;
+    /* align-self: center;
+    align-items: center;
+    align-content: center;
+    text-align: center; */
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: row;
+}

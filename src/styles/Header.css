@@ -1,0 +1,19 @@
+.header {
+    border-radius: 10px;
+    margin: auto;
+    width: 75%;
+    background: white;
+    position: relative;
+}
+
+.header h1 {
+    margin-left: 2%;
+    padding: auto;
+    left: 1%;
+}
+
+.header button {
+    position: absolute;
+    right: 2%;
+    top: 25%;
+}
