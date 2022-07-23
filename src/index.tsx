@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./styles/index.css";
+import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Header from "./component/Header";
@@ -12,47 +12,47 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <React.StrictMode>
-            <Header />
-            <App />
-            <Link to={"create"}>
-              <button className="add-button" type="button">
-                +
-              </button>
-            </Link>
-          </React.StrictMode>
-        }
-      />
-      <Route
-        path="create"
-        element={
-          <React.StrictMode>
-            <Header />
-            <Create />
-            <Link to={"/"}>
-              <button className="add-button" type="button">
-                {"<-"}
-              </button>
-            </Link>
-          </React.StrictMode>
-        }
-      />
-      <Route
-        path="detail/:id"
-        element={
-          <React.StrictMode>
-            <Header />
-            <Detail />
-          </React.StrictMode>
-        }
-      />
-    </Routes>
-  </BrowserRouter>
+  <div className="bg-stone-200 min-h-screen pt-10">
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <React.StrictMode>
+              <Header />
+              <App />
+            </React.StrictMode>
+          }
+        />
+        <Route
+          path="create"
+          element={
+            <React.StrictMode>
+              <Header />
+              <Create />
+            </React.StrictMode>
+          }
+        />
+        <Route
+          path="detail/:id"
+          element={
+            <React.StrictMode>
+              <Header />
+              <Detail />
+            </React.StrictMode>
+          }
+        />
+      </Routes>
+      <Link to={"create"}>
+        <button
+          className="sticky h-12 w-12 text-3xl bg-black text-white bottom-20 left-full mr-20  rounded-full"
+          type="button"
+        >
+          +
+        </button>
+      </Link>
+    </BrowserRouter>
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function

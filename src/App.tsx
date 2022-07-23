@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./styles/App.css";
 
-function App() {
+export default function App() {
   const [products, setProducts] = React.useState([]);
-
   const [categories, setCategories] = React.useState([]);
-
   const [loading, setLoading] = React.useState(true);
+  const [selectedCategory, setSelectedCategory] = React.useState("All");
 
   async function getProductsAndCategories() {
     const resProducts = await fetch(
@@ -35,12 +33,6 @@ function App() {
     setCategories(categories);
   }
 
-  const [selectedCategory, setSelectedCategory] = React.useState("All");
-
-  React.useLayoutEffect(() => {
-    getProductsAndCategories();
-  }, []);
-
   function handleCategoryChange(event: any) {
     setSelectedCategory(event.target.value);
   }
@@ -58,48 +50,44 @@ function App() {
     }
   }
 
-  return !loading ? (
+  React.useEffect(() => {
+    getProductsAndCategories();
+  }, []);
+
+  return (
     <>
-      <div className="App">
-        <div className="search-div">
-          <input
-            type="text"
-            id="fname"
-            name="firstname"
-            placeholder="Your name.."
-          />
+      {loading && <div>Loading</div>}
 
-          <select
-            id="categories"
-            name="categories"
-            onChange={handleCategoryChange}
-          >
-            <option key={5} value={"All"}>
-              All
-            </option>
-            {categories.map((m: any) => {
-              return (
-                <option key={m.id} value={m.name}>
-                  {m.name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
+      {loading || (
+        <div className="m-auto w-9/12 relative">
+          <div className="mb-20">
+            <input
+              className=" mt-8 ml-4 shadow appearance-none border rounded w-4/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              id="search"
+              name="search"
+              placeholder="Apple Watch, Samsung S21, Macbook Pro..."
+            />
+            <select
+              className="right-0 absolute mt-8 mr-4 h-10 shadow appearance-none border rounded w-40 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="categories"
+              name="categories"
+              onChange={handleCategoryChange}
+            >
+              <option value={"All"}>All</option>
+              {categories.map((m: any) => {
+                return (
+                  <option key={m.id} value={m.name}>
+                    {m.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
 
-        <div className="list">
-          {products?.map(
-            ({
-              avatar,
-              category,
-              createdAt,
-              description,
-              developerEmail,
-              id,
-              name,
-              price,
-            }: any) => {
-              if (selectedCategory === "All") {
+          <div className="m-auto mt-24 justify-center items-center flex flex-row flex-wrap mb-24 w-10/12">
+            {products?.map(({ avatar, category, id, name, price }: any) => {
+              if (selectedCategory === "All" || category === selectedCategory) {
                 return (
                   <div key={id}>
                     <button
@@ -109,55 +97,32 @@ function App() {
                     >
                       Delete
                     </button>
-                    <Link to={`detail/${id}`} className="item">
+                    <Link
+                      to={`detail/${id}`}
+                      className="w-32 h-56 mr-8 ml-8 mb-14 flex justify-center text-center"
+                    >
                       <div>
-                        <div className="avatar-div">
-                          <img src={avatar} alt="avatar" width={150} />
+                        <div className="w-40 h-40 mb-4 m-auto rounded-lg border-8 border-solid border-white bg-white justify-center content-center flex p-0">
+                          <img
+                            className="max-h-full max-w-full m-auto bg-white"
+                            src={avatar}
+                            alt="avatar"
+                          />
                         </div>
 
                         <div>
-                          <p>{name}</p>
+                          <p className="m-auto">{name}</p>
                           <p>$ {price}</p>
                         </div>
                       </div>
                     </Link>
                   </div>
                 );
-              } else {
-                if (selectedCategory === category) {
-                  return (
-                    <div key={id}>
-                      <button
-                        onClick={() => {
-                          deleteProduct(id);
-                        }}
-                      >
-                        Delete
-                      </button>
-                      <Link to={`detail/${id}`} className="item" key={id}>
-                        <div>
-                          <div className="avatar-div">
-                            <img src={avatar} alt="avatar" width={150} />
-                          </div>
-
-                          <div>
-                            <p>{name}</p>
-                            <p>$ {price}</p>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-                  );
-                }
               }
-            }
-          )}
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </>
-  ) : (
-    <div>Loading</div>
   );
 }
-
-export default App;
