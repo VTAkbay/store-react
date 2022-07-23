@@ -20,7 +20,6 @@ export default function Create() {
       ).json();
 
       setCategories(categories);
-      console.log(categories);
     }
 
     fetchCategories();
@@ -34,7 +33,6 @@ export default function Create() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(inputs);
 
     const requestOptions = {
       method: "POST",
@@ -55,7 +53,6 @@ export default function Create() {
       "https://62286b649fd6174ca82321f1.mockapi.io/case-study/products",
       requestOptions
     ).then((response) => {
-      console.log(response.status);
 
       if (response.status === 201) {
         navigate("/", { replace: true });

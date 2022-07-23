@@ -4,13 +4,10 @@ import "./styles/App.css";
 
 function App() {
   const [products, setProducts] = React.useState([]);
-  console.log(products);
 
   const [categories, setCategories] = React.useState([]);
-  console.log(categories);
 
   const [loading, setLoading] = React.useState(true);
-  console.log(loading);
 
   async function getProductsAndCategories() {
     const resProducts = await fetch(
