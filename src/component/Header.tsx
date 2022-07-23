@@ -5,9 +5,10 @@ import "../styles/Header.css";
 export default function Header() {
   return (
     <div className="header">
-      <Link to={"/"}>
-        <h1>UPayments Store</h1>
-      </Link>
+      <h1>
+        <Link to={"/"}>UPayments Store</Link>
+      </h1>
+
       <button type="button">Register</button>
     </div>
   );
