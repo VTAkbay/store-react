@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Loader from "./component/Loader";
 
 export default function App() {
   const [products, setProducts] = React.useState([]);
@@ -15,9 +16,6 @@ export default function App() {
       }
     );
     resProducts.json().then((result: any) => setProducts(result));
-    if (resProducts.status === 200) {
-      setLoading(false);
-    }
 
     const resCategories = await fetch(
       "https://62286b649fd6174ca82321f1.mockapi.io/case-study/categories/",
@@ -26,11 +24,10 @@ export default function App() {
       }
     );
     resCategories.json().then((result: any) => setCategories(result));
-    if (resCategories.status === 200) {
+
+    if (resCategories.status === 200 && resProducts.status === 200) {
       setLoading(false);
     }
-
-    setCategories(categories);
   }
 
   function handleCategoryChange(event: any) {
@@ -56,7 +53,11 @@ export default function App() {
 
   return (
     <>
-      {loading && <div>Loading</div>}
+      {loading && (
+        <div>
+          <Loader></Loader>
+        </div>
+      )}
 
       {loading || (
         <div className="m-auto w-9/12 relative">
@@ -69,7 +70,7 @@ export default function App() {
               placeholder="Apple Watch, Samsung S21, Macbook Pro..."
             />
             <select
-              className="right-0 absolute mt-8 mr-4 h-10 shadow appearance-none border rounded w-40 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="right-0 absolute mt-8 mr-4 h-10 shadow appearance-none border rounded w-30 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="categories"
               name="categories"
               onChange={handleCategoryChange}
@@ -85,7 +86,7 @@ export default function App() {
             </select>
           </div>
 
-          <div className="m-auto mt-24 justify-center items-center flex flex-row flex-wrap mb-24 w-10/12">
+          <div className="m-auto mt-24 justify-center flex flex-row flex-wrap mb-24 w-10/12">
             {products?.map(({ avatar, category, id, name, price }: any) => {
               if (selectedCategory === "All" || category === selectedCategory) {
                 return (
@@ -95,7 +96,18 @@ export default function App() {
                         deleteProduct(id);
                       }}
                     >
-                      Delete
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
                     </button>
                     <Link
                       to={`detail/${id}`}
@@ -118,6 +130,8 @@ export default function App() {
                     </Link>
                   </div>
                 );
+              } else {
+                return undefined;
               }
             })}
           </div>

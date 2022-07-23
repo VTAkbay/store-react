@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
+import Loader from "./Loader";
 
 export default function Detail() {
   const { id } = useParams();
@@ -26,7 +27,11 @@ export default function Detail() {
 
   return (
     <>
-      {loading && <div>Loading</div>}
+      {loading && (
+        <div>
+          <Loader></Loader>
+        </div>
+      )}
 
       {loading || (
         <div className="relative justify-center w-6/12 m-auto mt-12">
@@ -46,7 +51,7 @@ export default function Detail() {
           <div className=" border-solid border-gray-500 border my-6 m-auto w-11/12 justify-center"></div>
           <div>
             <p className=" text-lg font-medium mb-3">Description</p>
-            <p className=" text-gray-700">{item.description}</p>
+            <p className=" text-gray-700 pb-10">{item.description}</p>
           </div>
         </div>
       )}
