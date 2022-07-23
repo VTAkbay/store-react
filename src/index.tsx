@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Header from "./component/Header";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Create from "./component/Create";
 import Detail from "./component/Detail";
 
@@ -21,7 +21,6 @@ root.render(
             <React.StrictMode>
               <Header />
               <App />
-              
             </React.StrictMode>
           }
         />
