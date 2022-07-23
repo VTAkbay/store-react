@@ -60,7 +60,7 @@ export default function App() {
       )}
 
       {loading || (
-        <div className="m-auto w-9/12 relative">
+        <div className="m-auto px-52 relative">
           <div className="mb-20">
             <input
               className=" mt-8 ml-4 shadow appearance-none border rounded w-4/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -70,7 +70,7 @@ export default function App() {
               placeholder="Apple Watch, Samsung S21, Macbook Pro..."
             />
             <select
-              className="right-0 absolute mt-8 mr-4 h-10 shadow appearance-none border rounded w-30 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="float-right relative mt-8 mr-4 h-10 shadow appearance-none border rounded w-30 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="categories"
               name="categories"
               onChange={handleCategoryChange}
@@ -135,6 +135,25 @@ export default function App() {
               }
             })}
           </div>
+          <Link to={"create"}>
+            <button
+              className="sticky h-12 w-12 bottom-14 left-full"
+              type="button"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className=""
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          </Link>
         </div>
       )}
     </>
