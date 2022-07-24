@@ -92,6 +92,7 @@ export default function App() {
                 return (
                   <div key={id}>
                     <button
+                      id="delete-product-button"
                       onClick={() => {
                         deleteProduct(id);
                       }}
@@ -135,7 +136,7 @@ export default function App() {
               }
             })}
           </div>
-          <Link to={"create"}>
+          <Link to={"create"} id="create-button">
             <button
               className="sticky h-12 w-12 bottom-14 left-full"
               type="button"
