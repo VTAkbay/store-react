@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Header from "./component/Header";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import Create from "./component/Create";
 import Detail from "./component/Detail";
 
@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <div className="bg-stone-200 min-h-screen pt-10">
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route
           path="/"
@@ -43,7 +43,7 @@ root.render(
           }
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </div>
 );
 
