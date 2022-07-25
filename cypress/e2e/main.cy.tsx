@@ -59,7 +59,9 @@ describe("Main Test", () => {
       `https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-graphite-select?wid=940&hei=1112&fmt=png-alpha&.v=1645552346288`
     );
 
-    cy.get("#price").type(`${id}`);
+    cy.get("[id^=category]").select("Electronic");
+
+    cy.get("[id^=price]").type("699");
 
     cy.get("[id^=submit-product-button]").click();
 
@@ -77,7 +79,7 @@ describe("Main Test", () => {
 
     cy.contains(`Apple iPhone 13 Pro Max 256 GB ${id}`);
 
-    cy.contains(`$ ${id}`);
+    cy.contains(`$ 699`);
   });
 
   it("Deleted latest created product", () => {
