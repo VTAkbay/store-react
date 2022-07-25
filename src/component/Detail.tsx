@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
+import { baseApiUrl } from "../lib/constants";
 import Loader from "./Loader";
 
 export default function Detail() {
@@ -9,12 +10,9 @@ export default function Detail() {
   const [loading, setLoading] = React.useState(true);
 
   async function getProduct(id: string) {
-    const product = await fetch(
-      `https://62286b649fd6174ca82321f1.mockapi.io/case-study/products/${id}`,
-      {
-        method: "GET",
-      }
-    );
+    const product = await fetch(`${baseApiUrl}/case-study/products/${id}`, {
+      method: "GET",
+    });
     product.json().then((result: any) => setItem(result));
     if (product.status === 200) {
       setLoading(false);

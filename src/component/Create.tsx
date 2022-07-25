@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { baseApiUrl, defaultAvatarUrl, developerEmail } from "../lib/constants";
 
 export default function Create() {
   const navigate = useNavigate();
@@ -17,19 +18,16 @@ export default function Create() {
       price: inputs.price,
       category: inputs.category,
       description: inputs.description,
-      avatar: !inputs.avatar ? "https://picsum.photos/200/300" : inputs.avatar,
-      developerEmail: "vta@vahidturabakbay.com",
+      avatar: !inputs.avatar ? defaultAvatarUrl : inputs.avatar,
+      developerEmail: developerEmail,
     }),
   };
 
   async function fetchCategories() {
     const categories = await (
-      await fetch(
-        "https://62286b649fd6174ca82321f1.mockapi.io/case-study/categories/",
-        {
-          method: "GET",
-        }
-      )
+      await fetch(`${baseApiUrl}/case-study/categories/`, {
+        method: "GET",
+      })
     ).json();
 
     setCategories(categories);
@@ -44,14 +42,13 @@ export default function Create() {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    fetch(
-      "https://62286b649fd6174ca82321f1.mockapi.io/case-study/products",
-      requestOptions
-    ).then((response) => {
-      if (response.status === 201) {
-        navigate("/", { replace: true });
+    fetch(`${baseApiUrl}/case-study/products`, requestOptions).then(
+      (response) => {
+        if (response.status === 201) {
+          navigate("/", { replace: true });
+        }
       }
-    });
+    );
   };
 
   React.useEffect(() => {

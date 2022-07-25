@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Loader from "./component/Loader";
+import { baseApiUrl } from "./lib/constants";
 
 export default function App() {
   const [products, setProducts] = React.useState([]);
@@ -9,20 +10,14 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = React.useState("All");
 
   async function getProductsAndCategories() {
-    const resProducts = await fetch(
-      "https://62286b649fd6174ca82321f1.mockapi.io/case-study/products/",
-      {
-        method: "GET",
-      }
-    );
+    const resProducts = await fetch(`${baseApiUrl}/case-study/products/`, {
+      method: "GET",
+    });
     resProducts.json().then((result: any) => setProducts(result));
 
-    const resCategories = await fetch(
-      "https://62286b649fd6174ca82321f1.mockapi.io/case-study/categories/",
-      {
-        method: "GET",
-      }
-    );
+    const resCategories = await fetch(`${baseApiUrl}/case-study/categories/`, {
+      method: "GET",
+    });
     resCategories.json().then((result: any) => setCategories(result));
 
     if (resCategories.status === 200 && resProducts.status === 200) {
@@ -35,12 +30,9 @@ export default function App() {
   }
 
   async function deleteProduct(id: any) {
-    const res = await fetch(
-      `https://62286b649fd6174ca82321f1.mockapi.io/case-study/products/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const res = await fetch(`${baseApiUrl}/case-study/products/${id}`, {
+      method: "DELETE",
+    });
 
     if (res.status === 200) {
       getProductsAndCategories();
