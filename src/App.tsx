@@ -87,8 +87,12 @@ export default function App() {
           </div>
 
           <div className="m-auto mt-24 justify-center flex flex-row flex-wrap mb-24 w-10/12">
-            {products?.map(({ avatar, category, id, name, price }: any) => {
-              if (selectedCategory === "All" || category === selectedCategory) {
+            {products
+              ?.filter(
+                ({ category }: any) =>
+                  selectedCategory === "All" || category === selectedCategory
+              )
+              ?.map(({ avatar, id, name, price }: any) => {
                 return (
                   <div key={id}>
                     <button
@@ -131,10 +135,7 @@ export default function App() {
                     </Link>
                   </div>
                 );
-              } else {
-                return undefined;
-              }
-            })}
+              })}
           </div>
           <Link to={"create"} id="create-button">
             <button
